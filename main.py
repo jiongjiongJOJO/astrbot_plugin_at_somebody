@@ -35,13 +35,6 @@ class AtSomebody(Star):
                 )
                 return
 
-            # todo
-            yield event.plain_result(
-                '当前unified_msg_origin: {}, 请求消息链为: {}'.format(
-                    event.unified_msg_origin, message_chain
-                )
-            )
-
             # 获取群号
             if not command_params.get('group_id'):
                 if is_group_message(event):

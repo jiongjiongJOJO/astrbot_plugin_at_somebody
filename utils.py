@@ -74,64 +74,6 @@ async def get_all_remain_times(event: AiocqhttpMessageEvent, group_id) -> int:
     return remain_times
 
 
-async def send_message_bak(
-    event: AiocqhttpMessageEvent, command_params: dict
-):
-    """
-    发送消息到指定的群聊
-    :param event: AiocqhttpMessageEvent
-    :param command_params: 命令参数字典，包含群号、目标用户和内容
-    """
-    payloads = {"group_id": command_params['group_id'], "message": []}
-    at_chain = []
-    if command_params["target"] != "all":
-        for user_id in command_params["target"]:
-            at_chain.append({"type": "at", "data": {"qq": user_id}})
-    else:
-        at_chain.append({"type": "at", "data": {"qq": "all"}})
-
-    # 转换消息类型
-    msg_chain = [{"type": "text", "data": {"text": "\n\n"}}]
-    for chain in command_params["content"]:
-        if isinstance(chain, Comp.Plain):
-            msg_chain.append(
-                {"type": "text", "data": {"text": chain.text}}
-            )
-        elif isinstance(chain, Comp.Face):
-            msg_chain.append(
-                {"type": "face", "data": {"id": chain.id}}
-            )
-        elif isinstance(chain, Comp.Video):
-            msg_chain.append(
-                {"type": "video", "data": {"file": chain.url}}
-            )
-        elif isinstance(chain, Comp.At):
-            msg_chain.append(
-                {"type": "at", "data": {"qq": chain.qq}}
-            )
-        elif isinstance(chain, Comp.Image):
-            msg_chain.append(
-                {"type": "image", "data": {"file": chain.url}}
-            )
-        elif isinstance(chain, Comp.Record):
-            msg_chain.append(
-                {"type": "record", "data": {"file": chain.url}}
-            )
-        elif isinstance(chain, Comp.File):
-            msg_chain.append({"type": "file", "data": {"file": chain.url}})
-
-    # 合并艾特和消息链
-    payloads["message"] = at_chain + msg_chain
-
-    client = event.bot
-    await client.api.call_action("send_group_msg", **payloads)
-    logger.info(
-        "在群聊 {} 中发送消息: {}".format(
-            command_params["group_id"], payloads["message"]
-        )
-    )
-
-
 def get_group_unified_msg_origin(
     group_id: str, platform: str = "aiocqhttp"
 ) -> str:
