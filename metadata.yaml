@@ -1,5 +1,5 @@
 name: at_somebody # 这是你的插件的唯一识别名。
 desc: [仅限aiocqhttp] 在指定群内艾特(@)给定名单的用户+要通知的内容 # 插件简短描述
-version: v1.0.0 # 插件版本号。格式：v1.1.1 或者 v1.1
+version: v1.0.1 # 插件版本号。格式：v1.1.1 或者 v1.1
 author: JOJO # 作者
 repo: https://github.com/jiongjiongJOJO/astrbot_plugin_at_somebody # 插件的仓库地址
