@@ -85,8 +85,7 @@ class AtSomebody(Star):
         unified_msg_origin = get_group_unified_msg_origin(command_params["group_id"])
 
         # 合并艾特和消息链
-        chains = MessageChain()
-        chains.chain.extend(at_chain + [Comp.Plain('\n\n')] + msg_chain)
+        chains = MessageChain(at_chain + [Comp.Plain('\n\n')] + msg_chain)
         await self.context.send_message(unified_msg_origin, chains)
 
         logger.info(
