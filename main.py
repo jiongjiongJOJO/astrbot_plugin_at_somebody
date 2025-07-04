@@ -93,7 +93,7 @@ class AtSomebody(Star):
 
         # 合并艾特和消息链
         chains = MessageChain()
-        chains.chain.extend(at_chain + [Comp.Plain(' \n\n')] + msg_chain)
+        chains.chain.extend(at_chain + [Comp.Plain('\n\n')] + msg_chain)
         await self.context.send_message(unified_msg_origin, chains)
 
         logger.info(
