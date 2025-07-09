@@ -9,7 +9,7 @@ from .utils import parse_command, is_group_message, get_all_remain_times, get_gr
     "at_somebody",
     "JOJO",
     "[仅限aiocqhttp] 在指定群内艾特(@)给定名单的用户+要通知的内容",
-    "1.0.1",
+    "1.0.2",
 )
 class AtSomebody(Star):
     def __init__(self, context: Context):
